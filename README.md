@@ -131,9 +131,9 @@ Quit from the interactive shell with `\q`
 ##### Testing the Schema
 
 Now the schema is set up successfully,
-you can test it using the unit_test script
+you can test it using the unit test script
 
-`python tournament_sql.py`
+`python tournament_test.py`
 
 If all the tests pasts you should see
 the test messages and
@@ -142,7 +142,9 @@ the test messages and
 
 If you see that, the schema is working properly.
 
-You can use it using the python functions in
+You can use it either by
+
+using the python functions in
 `tournament.py`
 
 or by using your own SQL.

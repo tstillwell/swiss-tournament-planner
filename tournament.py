@@ -57,13 +57,10 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
-    db = connect()
-    cursor = db.cursor()
-    SQL = "INSERT INTO players (name) VALUES (%s);"
-    player_name = (name,)  # prevent SQLI attacks
-    cursor.execute(SQL, player_name)
-    db.commit()
-    db.close()
+    with get_cursor() as cursor:
+        SQL = "INSERT INTO players (name) VALUES (%s);"
+        player_name = (name,)  # prevent SQLI attacks
+        cursor.execute(SQL, player_name)
 
 
 def playerStandings():

@@ -4,7 +4,7 @@
 #
 
 import psycopg2
-
+from contextlib import contextmanager
 
 def connect():
     """Connect to the PostgreSQL database.  Returns a database connection."""
@@ -13,22 +13,31 @@ def connect():
     except:
         print("Database Connection failed.")
 
+@contextmanager
+def get_cursor():
+	""" Query helper function to avoid repeating code """
+	db = connect()
+	cursor = db.cursor()
+	try:
+		yield cursor
+	except:
+		raise
+	else:
+		db.commit()
+	finally:
+		cursor.close()
+		db.close()
+
 def deleteMatches():
     """Remove all the match records from the database."""
-    db = connect()
-    cursor = db.cursor()
-    cursor.execute("DELETE FROM matches;")
-    db.commit()
-    db.close()
+    with get_cursor() as cursor:
+        cursor.execute("DELETE FROM matches;")
 
 
 def deletePlayers():
     """Remove all the player records from the database."""
-    db = connect()
-    cursor = db.cursor()
-    cursor.execute("DELETE FROM players;")
-    db.commit()
-    db.close()
+    with get_cursor() as cursor:
+        cursor.execute("DELETE FROM players;")
 
 
 def countPlayers():
@@ -72,12 +81,10 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    db = connect()
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM standings_view")
-    standings = cursor.fetchall()
-    db.close()
-    return standings
+    with get_cursor() as cursor:
+        cursor.execute("SELECT * FROM standings_view;")
+        standings = cursor.fetchall()
+        return standings
 
 
 def reportMatch(winner, loser):
@@ -111,9 +118,7 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    db = connect()
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM pairings")
-    pairings = cursor.fetchall()
-    db.close()
-    return pairings
+    with get_cursor() as cursor:
+        cursor.execute("SELECT * FROM pairings")
+        pairings = cursor.fetchall()
+        return pairings

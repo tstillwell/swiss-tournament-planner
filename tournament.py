@@ -1,7 +1,8 @@
-#!/usr/bin/env python
-#
-# tournament.py -- implementation of a Swiss-system tournament
-#
+""" Tournament.py Database functions module.
+
+    Contains fucntions for using postgreSQ tournament database. Database
+    table definitions must be imported first. See README file for more info
+"""
 
 import psycopg2
 from contextlib import contextmanager

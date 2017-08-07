@@ -89,13 +89,10 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
-    db = connect()
-    cursor = db.cursor()
-    SQL = "INSERT INTO matches (winner_id, loser_id) VALUES (%s, %s);"
-    data = (winner, loser,)  # prevent SQLI attacks
-    cursor.execute(SQL, data)
-    db.commit()
-    db.close()
+    with get_cursor() as cursor:
+        SQL = "INSERT INTO matches (winner_id, loser_id) VALUES (%s, %s);"
+        data = (winner, loser,)  # prevent SQLI attacks
+        cursor.execute(SQL, data)
 
 
 def swissPairings():

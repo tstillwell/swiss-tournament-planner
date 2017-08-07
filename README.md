@@ -16,15 +16,15 @@ See https://en.wikipedia.org/wiki/Swiss-system_tournament
 To set up the database, first create a database called
 `tournament`
 
-`psql ->create database tournament;`
+`psql -> create database tournament;`
 
 Then connect to the database
 
-`psql ->\connect tournament`
+`psql -> \connect tournament`
 
 Once that is done, import the database definitions.
 
-`tournament ->\i tournament.sql`
+`tournament -> \i tournament.sql`
 
 Now, exit the psql interactive terminal
 and run the unit tests to confirm everything is working
@@ -82,7 +82,7 @@ in the connect function in `tournament.py`
 
 `dbname=tournament`
 
-`psql ->create database tournament;`
+`psql -> create database tournament;`
 
 You should get some output that shows:
 `CREATE DATABASE`

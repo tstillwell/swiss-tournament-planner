@@ -150,16 +150,17 @@ using the python functions in
 or by using your own SQL.
 
 ### Modifying Schema
-If you wish to modify the schema - 
-such as by adding new columns or tables,
-you may need to drop the database/tables.
+If you wish to modify the schema -
+such as by adding new columns or table definitions
+to `tournament.sql`, you may need to drop the database/tables.
 
 To do so just run
 
 `psql => drop database tournament;`
 
-Then recreate the database.
-Afterwards, reimport the modified table definitions
+Then recreate the database,
+and reimport the modified table definitions
+as described earlier in this README.
 
 ## Built with help from
 

@@ -149,6 +149,18 @@ using the python functions in
 
 or by using your own SQL.
 
+### Modifying Schema
+If you wish to modify the schema - 
+such as by adding new columns or tables,
+you may need to drop the database/tables.
+
+To do so just run
+
+`psql => drop database tournament;`
+
+Then recreate the database.
+Afterwards, reimport the modified table definitions
+
 ## Built with help from
 
 ### PostgreSQL
@@ -162,6 +174,7 @@ Portions Copyright (c) 1994, The Regents of the University of California
 http://www.postgresql.org/about/
 
 https://www.postgresql.org/about/licence/
+
 
 ### Python 2
 
